@@ -26,6 +26,16 @@ async function getFirestoreApi() {
   return firestore
 }
 
+/** All saved answers, newest first. Needs `allow read` on the collection in the Firestore rules. */
+export async function fetchDateResponses() {
+  const fs = await getFirestoreApi()
+  if (!fs) throw new Error('Firebase keys are missing in .env')
+  const snap = await fs.getDocs(fs.collection(fs.db, COLLECTION))
+  const rows = snap.docs.map((d) => ({ id: d.id, ...d.data() }))
+  const time = (r) => r.createdAt?.toMillis?.() ?? (Date.parse(r.createdAtLocal || r.acceptedAt) || 0)
+  return rows.sort((a, b) => time(b) - time(a))
+}
+
 /** Saves the final answer. Always keeps a local copy too, so nothing is lost. */
 export async function saveDateResponse(answers) {
   const record = {

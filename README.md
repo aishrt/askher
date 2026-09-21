@@ -41,6 +41,10 @@ service cloud.firestore {
 }
 ```
 
+## Seeing the responses
+
+Open `https://your-site.com/?lenovo=<password>`. With the right password you get a table of every response; any other value shows a 404. Only the SHA-256 of the password is kept in the code (`src/lib/adminKey.js`, which explains how to change it). The page reads straight from Firestore, so the rules above need `allow read: if true;` on `dateResponses`.
+
 ## Personal links (code → name)
 
 Names live in `src/recipients.js`:

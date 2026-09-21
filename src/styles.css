@@ -823,3 +823,76 @@ button {
   .bg-heart, .bg-dot, .bg-blob, .btn-yes { animation: none; }
   .bg-heart { display: none; }
 }
+
+/* ---------- responses page (?lenovo=…) ---------- */
+
+.responses {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+.responses-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.responses-head .title { margin: 0; }
+.responses-msg { color: var(--muted); margin: 16px 0; }
+.responses-msg.is-error { color: var(--hot); }
+.responses-table-wrap {
+  overflow-x: auto;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+.responses-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.responses-table th,
+.responses-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.responses-table th {
+  color: var(--ink);
+  font-weight: 700;
+}
+.responses-table tbody tr:last-child td { border-bottom: 0; }
+.responses-code {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  color: var(--muted);
+  font-family: ui-monospace, monospace;
+}
+.responses-ua {
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ---------- 404 ---------- */
+
+.not-found {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  color: var(--muted);
+}
+.not-found h1 {
+  margin: 0;
+  font-size: 4rem;
+  color: var(--ink);
+}
