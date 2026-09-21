@@ -1,15 +1,23 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import Card from '../components/Card'
+import FoodIcon from '../components/FoodIcon'
 import { sfx, say } from '../lib/sound'
 
 export const FOODS = [
+  // `emoji` is a text fallback; dosa, chaap, pakode, thali & chole bhature use drawn icons (FoodIcon)
+  { id: 'dosa', label: 'Dosa', emoji: '🫓' },
+  { id: 'momos', label: 'Momos', emoji: '🥟' },
+  { id: 'chaap', label: 'Chaap', emoji: '🍢' },
+  { id: 'chole-bhature', label: 'Chole Bhature', emoji: '🥘' },
+  { id: 'pakode', label: 'Pakode', emoji: '🧆' },
+  { id: 'thali', label: 'Thali', emoji: '🍛' },
+  { id: 'maggi', label: 'Maggi', emoji: '🍜' },
   { id: 'pizza', label: 'Pizza', emoji: '🍕' },
-  { id: 'sushi', label: 'Sushi', emoji: '🍣' },
-  { id: 'burgers', label: 'Burgers', emoji: '🍔' },
+  { id: 'burger', label: 'Burger', emoji: '🍔' },
+  { id: 'fries', label: 'French Fries', emoji: '🍟' },
   { id: 'pasta', label: 'Pasta', emoji: '🍝' },
-  { id: 'tacos', label: 'Tacos', emoji: '🌮' },
-  { id: 'ramen', label: 'Ramen', emoji: '🍜' },
+  { id: 'coffee', label: 'Coffee', emoji: '☕' },
 ]
 
 export default function PickFood({ food, onPick, onNext }) {
@@ -34,7 +42,7 @@ export default function PickFood({ food, onPick, onNext }) {
   }
 
   return (
-    <Card>
+    <Card className="card-food">
       <h1 className="title">What are we feeling? 🍽️✨</h1>
       <p className="subtitle">pick your vibe</p>
 
@@ -46,7 +54,7 @@ export default function PickFood({ food, onPick, onNext }) {
             className={`food ${chosen === f.id ? 'is-active' : ''}`}
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: chosen === f.id ? 1.06 : 1 }}
-            transition={{ delay: chosen ? 0 : 0.1 + i * 0.06, type: 'spring', stiffness: 300, damping: 18 }}
+            transition={{ delay: chosen ? 0 : 0.1 + i * 0.04, type: 'spring', stiffness: 300, damping: 18 }}
             whileHover={{ y: -4, rotate: i % 2 ? 2 : -2 }}
             whileTap={{ scale: 0.92 }}
             onPointerEnter={(e) => e.pointerType === 'mouse' && sfx.pop()}
@@ -57,7 +65,7 @@ export default function PickFood({ food, onPick, onNext }) {
               animate={chosen === f.id ? { rotate: [0, -15, 15, -10, 0], scale: [1, 1.3, 1] } : {}}
               transition={{ duration: 0.6 }}
             >
-              {f.emoji}
+              <FoodIcon food={f} />
             </motion.span>
             <span className="food-label">{f.label}</span>
           </motion.button>

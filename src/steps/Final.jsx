@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Card from '../components/Card'
+import FoodIcon from '../components/FoodIcon'
 import { sfx, say } from '../lib/sound'
 import { formatDate, formatTime } from '../lib/format'
 import { config } from '../config'
@@ -34,7 +35,7 @@ export default function Final({ answers, onAccept }) {
         <span>⏰ {formatTime(answers.time)}</span>
         {food && (
           <span>
-            {food.emoji} {food.label}
+            <FoodIcon food={food} /> {food.label}
           </span>
         )}
       </div>

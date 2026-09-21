@@ -2,12 +2,9 @@ import { useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Card from '../components/Card'
 import { sfx, say } from '../lib/sound'
-import { formatTime, toISODate } from '../lib/format'
-
-const TIMES = Array.from({ length: 21 }, (_, i) => {
-  const mins = 11 * 60 + i * 30 // 11:00 → 21:00
-  return `${String(Math.floor(mins / 60)).padStart(2, '0')}:${String(mins % 60).padStart(2, '0')}`
-})
+import { toISODate } from '../lib/format'
+import DatePicker from '../components/DatePicker'
+import TimePicker from '../components/TimePicker'
 
 function nextWeekday(target) {
   const d = new Date()
@@ -63,35 +60,15 @@ export default function PickDate({ date, time, onChange, onNext }) {
         ))}
       </div>
 
-      <label className="field">
+      <div className="field">
         <span className="field-label">Pick a Day 📆</span>
-        <input
-          type="date"
-          min={today}
-          value={date}
-          onChange={(e) => {
-            sfx.tap()
-            onChange({ date: e.target.value })
-          }}
-        />
-      </label>
+        <DatePicker value={date} min={today} onChange={(d) => onChange({ date: d })} />
+      </div>
 
-      <label className="field">
+      <div className="field">
         <span className="field-label">What time? ⏰</span>
-        <select
-          value={time}
-          onChange={(e) => {
-            sfx.tap()
-            onChange({ time: e.target.value })
-          }}
-        >
-          {TIMES.map((t) => (
-            <option key={t} value={t}>
-              {formatTime(t)}
-            </option>
-          ))}
-        </select>
-      </label>
+        <TimePicker value={time} onChange={(t) => onChange({ time: t })} />
+      </div>
 
       <motion.button
         className="btn btn-primary btn-block"

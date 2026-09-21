@@ -40,6 +40,7 @@ export default function App() {
 
   async function accept() {
     await saveDateResponse({
+      code: config.code,
       recipient: config.recipientName || null,
       date: answers.date,
       time: answers.time,

@@ -148,7 +148,16 @@ export default function Ask({ recipient, onYes }) {
         {count > 6 ? '🥺' : count > 2 ? '😳' : '👉👈'}
       </motion.div>
 
-      {recipient && <p className="eyebrow">hey {recipient} ✨</p>}
+      {recipient && (
+        <motion.p
+          className="name-badge"
+          initial={{ opacity: 0, scale: 0.6, y: 8 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 14, delay: 0.25 }}
+        >
+          hey <span className="name">{recipient}</span> 💌
+        </motion.p>
+      )}
       <h1 className="title">Will you go on a date with me?</h1>
 
       <AnimatePresence mode="wait">
